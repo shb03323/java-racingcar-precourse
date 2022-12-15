@@ -5,6 +5,8 @@ import java.util.Objects;
 import static racingcar.view.CommonMessage.ERROR_MESSAGE_PREFIX;
 
 public class Car {
+
+    private static final int MOVABLE_POINT = 4;
     private final String name;
     private int position = 0;
 
@@ -15,6 +17,13 @@ public class Car {
 
     public String getName() {
         return name;
+    }
+
+    public int movePosition(int number) {
+        if (number >= MOVABLE_POINT) {
+            return ++position;
+        }
+        return position;
     }
 
     private void validateNameLength(String name) {

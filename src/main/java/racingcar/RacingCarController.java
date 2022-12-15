@@ -10,9 +10,11 @@ import java.util.stream.Collectors;
 public class RacingCarController {
 
     private final TrialCounter trialCounter;
+    private final NumberGenerator numberGenerator;
 
     public RacingCarController() {
         this.trialCounter = new TrialCounter();
+        this.numberGenerator = new RandomNumberGenerator();
     }
 
     public void run() {
@@ -49,7 +51,8 @@ public class RacingCarController {
     }
 
     private void move() {
-
+        CarRepository.getMoveResult(numberGenerator);
+        trialCounter.takeTrial();
     }
 
     private List<String> splitCarsInput(String input) {

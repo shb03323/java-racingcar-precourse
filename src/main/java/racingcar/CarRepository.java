@@ -2,6 +2,7 @@ package racingcar;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static racingcar.view.CommonMessage.ERROR_MESSAGE_PREFIX;
 
@@ -14,9 +15,18 @@ public class CarRepository {
         carsNames.forEach(carName -> cars.add(new Car(carName)));
     }
 
-//    public static Map<String, Integer> move() {
-//
-//    }
+    private static Map<String, Integer> move(NumberGenerator numberGenerator) {
+        cars.forEach(car -> {
+            int number = numberGenerator.generate();
+            car.movePosition(number);
+        });
+        return getMoveResult()
+    }
+
+    private static Map<String, Integer> getMoveResult() {
+        move(numberGenerator);
+
+    }
 
 //    public static List<String> getWinners() {
 //
