@@ -5,6 +5,7 @@ import racingcar.view.OutputView;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class RacingCarController {
@@ -51,8 +52,9 @@ public class RacingCarController {
     }
 
     private void move() {
-        CarRepository.getMoveResult(numberGenerator);
+        Map<String, Integer> moveResults =  CarRepository.move(numberGenerator);
         trialCounter.takeTrial();
+        OutputView.printMoveResult(moveResults);
     }
 
     private List<String> splitCarsInput(String input) {

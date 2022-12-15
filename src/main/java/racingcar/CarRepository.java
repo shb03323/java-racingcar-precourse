@@ -1,8 +1,7 @@
 package racingcar;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static racingcar.view.CommonMessage.ERROR_MESSAGE_PREFIX;
 
@@ -11,21 +10,17 @@ public class CarRepository {
     private static final List<Car> cars = new ArrayList<>();
 
     public static void makeCars(List<String> carsNames) {
+        validateNotEmpty(carsNames);
         validateOverlappedName(carsNames);
         carsNames.forEach(carName -> cars.add(new Car(carName)));
     }
 
-    private static Map<String, Integer> move(NumberGenerator numberGenerator) {
-        cars.forEach(car -> {
-            int number = numberGenerator.generate();
-            car.movePosition(number);
-        });
-        return getMoveResult()
-    }
-
-    private static Map<String, Integer> getMoveResult() {
-        move(numberGenerator);
-
+    public static Map<String, Integer> move(NumberGenerator numberGenerator) {
+        Map<String, Integer> moveResults = new LinkedHashMap<>();
+        cars.forEach(car ->
+                moveResults.put(car.getName(), car.movePosition(numberGenerator.generate()))
+        );
+        return moveResults;
     }
 
 //    public static List<String> getWinners() {
