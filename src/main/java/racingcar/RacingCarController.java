@@ -23,6 +23,7 @@ public class RacingCarController {
         while (!trialCounter.isFinish()) {
             move();
         }
+        getResult();
     }
 
     private void initiation() {
@@ -55,6 +56,11 @@ public class RacingCarController {
         Map<String, Integer> moveResults =  CarRepository.move(numberGenerator);
         trialCounter.takeTrial();
         OutputView.printMoveResult(moveResults);
+    }
+
+    private void getResult() {
+        List<String> winners = CarRepository.getWinners();
+        OutputView.printWinners(winners);
     }
 
     private List<String> splitCarsInput(String input) {

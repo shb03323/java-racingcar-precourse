@@ -1,7 +1,9 @@
 package racingcar;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import static racingcar.view.CommonMessage.ERROR_MESSAGE_PREFIX;
 
@@ -23,9 +25,16 @@ public class CarRepository {
         return moveResults;
     }
 
-//    public static List<String> getWinners() {
-//
-//    }
+    public static List<String> getWinners() {
+        List<String> winners = new ArrayList<>();
+        for (Car targetCar: cars) {
+            long count = cars.stream().filter(targetCar::lessMoveThan).count();
+            if (count == 0) {
+                winners.add(targetCar.getName());
+            }
+        }
+        return winners;
+    }
 
     private static void validateNotEmpty(List<String> names) {
         if (names.isEmpty()) {
